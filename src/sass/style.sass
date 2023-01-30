@@ -1,0 +1,143 @@
+*, ::after, ::before
+    margin: 0
+    padding: 0
+    box-sizing: border-box // сбрасываем все заводские отступы
+
+html
+    font-size: 62.5% // чтобы 1 rem был равен не 16рх(как по умолчанию), а 10рх, но в этом случае слабовидящий пользователь не сможет увеличивать шрифт через настройки браузера. В этом случае можно задать 62.5% чтобы пользователь мог увеличивать размер шрифта через браузер.
+    
+body    
+    font-family: 'roboto' //sans-serif
+    font-weight: 400
+    color: gray
+    font-size: 1.6rem
+    letter-spacing: .2rem
+    background-color: white
+    padding: 5rem
+
+
+.container
+    background-color: #F7F7F7
+
+
+.header
+    position: relative
+    height: 95vh
+    background: linear-gradient(90deg, rgba(186, 133, 84, 0.7) 0.03%, rgba(1, 1, 1, 0.7) 99.94%), url(../img/header_background.jpg) center / cover no-repeat
+    clip-path:  polygon(0 0, 100% 0, 100% 100%, 0 80%)
+    &__logo
+        position: absolute
+        left: 5rem
+        top: 5rem
+        height: 7rem
+        width: 5.6rem
+    &__box
+        position: absolute
+        top: 40%
+        left: 50%
+        transform: translate(-50%, -50%) //выравниваем box по оси Х и оси У
+        width: 100%
+        text-align: center
+
+
+.titel-first
+    color: #ffffff
+    &__main
+        text-transform: uppercase
+        display: block
+        font-weight: 800
+        font-size: 5rem
+        line-height: 6rem
+        letter-spacing: 1rem
+        margin-bottom: 1rem
+        animation-name: departure_main
+        animation-duration: 5s // если не указать время анимация не заработает
+        animation-delay: 2s// задержка анимации чтобы сайт успел прогрузиться
+        animation-timing-function: ease // чтобы анимация была плавная
+        backface-visibility: hidden //на всякий случай, чтобы анимация не глючила
+        
+    &__sacondery
+        display: block
+        font-weight: 200
+        font-size: 4rem
+        line-height: 4.8rem
+        letter-spacing: .5rem
+        animation-name: departure_second
+        animation-duration: 5s // если не указать время анимация не заработает
+        animation-delay: 2s// задержка анимации чтобы сайт успел прогрузиться
+        animation-timing-function: ease // чтобы анимация была плавная
+        backface-visibility: hidden //на всякий случай, чтобы анимация не глючила
+        margin-bottom: 6.5rem
+.btn
+    &:link, &:visited // так как наша кнопка сделана из ссылки, то мы стилизуем её обычный вид, и вид после посещения
+        position: relative // чтобы можно было абсолютно позиционировать дочерний псевдоэлемент
+        text-transform: uppercase
+        text-decoration: none
+        color: #777777
+        padding: 1.5rem 4rem
+        background-color: white
+        border-radius: 5rem
+        display: inline-block
+        transition: aii .5s
+        font-size: 2rem
+    &:hover
+        transform: translateY(-4px)
+        box-shadow: (0px .4rem .4rem rgba(0, 0, 0, 0.5))
+        &::after
+            transform: scaleX(1.5) scaleY(1.8) // при наведении расширяет наш псевдоэлемент по оси Х и оси У
+            opacity: 0
+    &:active
+        transform: translateY(-2px)
+        box-shadow: (0px .4rem .4rem rgba(0, 0, 0, 0.2))
+        &::after
+            transform: scaleX(1.5) scaleY(1.8) // при наведении расширяет наш псевдоэлемент по оси Х и оси У
+            opacity: 0
+    &::after // создаём дочерний псевдоэлемент
+        content: "" // обязательно надоуказать (хотябы пустой) иначе псевдоэлемент не сработает
+        background-color: white
+        width: 100%
+        height: 100%
+        border-radius: 5rem
+        display: inline-block
+        position: absolute
+        top: 0
+        left: 0
+        z-index: -1
+        transition: all .3s
+    &_main
+        animation-name: departure_batton
+        animation-duration: 1s // если не указать время анимация не заработает
+        animation-delay: 2s// задержка анимации чтобы сайт успел прогрузиться
+        animation-timing-function: ease // чтобы анимация была плавная
+        animation-fill-mode: backwards // чтобы приобновлении кнопки сначала небыло, а потом она появлялась
+
+        
+@keyframes departure_main
+    0%
+        opacity: 0 // чтобы плавнопоявлялось
+        transform: translateX(-10rem)
+    70%
+        transform: translateX(4rem)
+        
+    100%
+        opacity: 1
+        
+@keyframes departure_second
+    0%
+        opacity: 0 // чтобы плавнопоявлялось
+        transform: translateX(10rem)
+    70%
+        transform: translateX(-4rem)
+        
+    100%
+        opacity: 1
+
+@keyframes departure_batton
+    0%
+        opacity: 0 // чтобы плавнопоявлялось
+        transform: translateY(5rem)
+        
+    100%
+        opacity: 1
+        transform: translateY(0rem)
+
